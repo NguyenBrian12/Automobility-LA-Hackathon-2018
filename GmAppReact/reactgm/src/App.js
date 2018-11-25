@@ -29,6 +29,7 @@ class App extends Component {
     return (
       <div className={styles.root}>
         <div>VIN: {this.state.vin}</div>
+        <div>Emily</div>
         <button onClick={this.handleClose}>Close</button>
         <div>Latitude: {this.state.lat}</div>
         <div>Longitude: {this.state.lng}</div>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import MerchantListMap from "./MerchantListMap";
 import styles from "./App.module.css";
 const gm = window.gm;
 
@@ -10,8 +11,9 @@ class App extends Component {
     timing: false,
     timeChange: "",
     vin: "pending...",
-    lat: null,
-    lng: null
+    latitude: null,
+    longitude: null,
+    merchantList: false
   };
   submitSearch = search => {
     console.log(search);
@@ -30,7 +32,8 @@ class App extends Component {
     this.setState(
       {
         timeLimit: time,
-        timing: false
+        timing: false,
+        merchantList: true
       },
       () => {
         console.log(this.state.timeLimit);
@@ -42,9 +45,11 @@ class App extends Component {
     this.setState({ vin });
 
     const processPosition = position => {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      this.setState({ lat, lng });
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      console.log("Lat:" + latitude);
+      console.log("long:" + longitude);
+      this.setState({ latitude: latitude, longitude: longitude });
     };
     gm.info.getCurrentPosition(processPosition, true);
     gm.info.watchPosition(processPosition, true);
@@ -53,6 +58,7 @@ class App extends Component {
   handleClose = () => {
     gm.system.closeApp();
   };
+
   handleBack = () => {
     this.setState(
       {
@@ -69,7 +75,12 @@ class App extends Component {
       timeChange: e.target.value
     });
   };
+
+  showTime = () => {
+    this.setState({});
+  };
   render() {
+    const { merchantList, latitude, longitude } = this.state;
     return (
       <div className={styles.main}>
         {this.state.searching === true && (
@@ -182,6 +193,17 @@ class App extends Component {
               Back
             </button>
           </>
+        )}
+        {this.state.timeLimit && this.state.searchCatagory && (
+          <div>
+            {merchantList && (
+              <MerchantListMap
+                merchantList={merchantList}
+                latitude={latitude}
+                longitude={longitude}
+              />
+            )}
+          </div>
         )}
       </div>
     );

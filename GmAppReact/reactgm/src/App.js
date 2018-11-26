@@ -194,19 +194,17 @@ class App extends Component {
             </button>
           </>
         )}
-        <div
-          style={{
-            marginTop: "10px"
-          }}
-        >
-          {merchantList && (
-            <MerchantListMap
-              merchantList={merchantList}
-              latitude={latitude}
-              longitude={longitude}
-            />
-          )}
-        </div>
+        {this.state.timeLimit && this.state.searchCatagory && (
+          <div>
+            {merchantList && (
+              <MerchantListMap
+                merchantList={merchantList}
+                latitude={latitude}
+                longitude={longitude}
+              />
+            )}
+          </div>
+        )}
       </div>
     );
   }

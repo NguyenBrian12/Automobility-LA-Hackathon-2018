@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./App.module.css";
 import GoogleMap from "./GoogleMap";
 import DirectionsMap from "./DirectionsMap";
 
@@ -170,47 +171,50 @@ class MerchantListMap extends React.Component {
     const { latitude, longitude } = this.props;
     console.log(merchantList);
     return (
-      <>
-        {merchantList.length > 0 ? (
-          <>
-            {merchantList.map(merchant => (
-              <div
-                key={merchant.id}
-                style={{
-                  marginTop: "40px",
-                  display: "flex",
-                  flexDirection: "column"
-                }}
-              >
-                <div
-                  style={{ color: "white" }}
-                  onClick={() => this.goToShop(merchant)}
-                >
-                  <strong style={{ color: "#7395AE" }}>{merchant.name}</strong>{" "}
-                  <div>Wait Time: {merchant.waitTime}m.</div>
-                  <div>Total Time: {merchant.totalTime}m</div>
-                </div>
-              </div>
-            ))}
-          </>
-        ) : (
-          <div />
-        )}
+      <div>
         {show && (
-          <GoogleMap
-            latitude={latitude}
-            longitude={longitude}
-            merchantList={merchantList}
-          />
+          <div className={styles.containerBoosted}>
+            <div className={styles.flexItem1}>
+              <GoogleMap
+                latitude={latitude}
+                longitude={longitude}
+                merchantList={merchantList}
+              />
+            </div>
+          </div>
         )}
         {directions && (
-          <DirectionsMap
-            merchantList={merchantList}
-            latitude={latitude}
-            longitude={longitude}
-          />
+          <div className={styles.containerBoosted}>
+            <div className={styles.flexItem1}>
+              <DirectionsMap
+                merchantList={merchantList}
+                latitude={latitude}
+                longitude={longitude}
+              />
+            </div>
+          </div>
         )}
-      </>
+
+        <div className={styles.flexItem2}>
+          {merchantList.length > 0 ? (
+            <div>
+              {merchantList.map(merchant => (
+                <div
+                  key={merchant.id}
+                  className={styles.rightContainer}
+                  onClick={() => this.goToShop(merchant)}
+                >
+                  <div>{merchant.name}</div>
+                  <div> Wait Time: {merchant.waitTime}m </div>{" "}
+                  <div>Total Time: {merchant.totalTime}m</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div>{null}</div>
+          )}
+        </div>
+      </div>
     );
   }
 }

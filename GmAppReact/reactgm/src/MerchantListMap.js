@@ -171,30 +171,24 @@ class MerchantListMap extends React.Component {
   render() {
     const { merchantList, directions, show } = this.state;
     const { latitude, longitude } = this.props;
-    console.log(merchantList);
+    console.log("dir", directions, latitude, longitude);
     return (
-      <div>
+      <div className={styles.containerBoosted}>
         {show && (
-          <div className={styles.containerBoosted}>
-            <div className={styles.flexItem1}>
-              <GoogleMap
-                latitude={latitude}
-                longitude={longitude}
-                merchantList={merchantList}
-              />
-            </div>
+          <div className={styles.flexItem1}>
+            <GoogleMap
+              latitude={latitude}
+              longitude={longitude}
+              merchantList={merchantList}
+            />
           </div>
         )}
-        {directions && (
-          <div className={styles.containerBoosted}>
-            <div className={styles.flexItem1}>
-              <DirectionsMap
-                merchantList={merchantList}
-                latitude={latitude}
-                longitude={longitude}
-              />
-            </div>
-          </div>
+        {this.state.directions && (
+          <DirectionsMap
+            merchantList={merchantList}
+            latitude={latitude}
+            longitude={longitude}
+          />
         )}
 
         <div className={styles.flexItem2}>

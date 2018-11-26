@@ -193,7 +193,7 @@ class App extends Component {
             </button>
           </>
         )}
-        {this.state.timeLimit && this.state.searchCatagory && (
+        {!!this.state.timeLimit && this.state.searchCatagory && (
           <div>
             {merchantList && (
               <MerchantListMap

@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./App.module.css";
 
 class MerchantListMap extends React.Component {
   state = {
@@ -139,30 +140,21 @@ class MerchantListMap extends React.Component {
     const { merchantList } = this.state;
     console.log(merchantList);
     return (
-      <>
+      <div>
         {merchantList.length > 0 ? (
-          <>
+          <div>
             {merchantList.map(merchant => (
-              <div
-                key={merchant.id}
-                style={{
-                  marginTop: "40px",
-                  display: "flex",
-                  flexDirection: "column"
-                }}
-              >
-                <div style={{ color: "white" }}>
-                  <strong style={{ color: "#7395AE" }}>{merchant.name}</strong>{" "}
-                  <div>Wait Time: {merchant.waitTime}m.</div>
-                  <div>Total Time: {merchant.totalTime}m</div>
-                </div>
+              <div key={merchant.id} className={styles.rightContainer}>
+                <div>{merchant.name}</div>
+                <div> Wait Time: {merchant.waitTime}m </div>{" "}
+                <div>Total Time: {merchant.totalTime}m</div>
               </div>
             ))}
-          </>
+          </div>
         ) : (
-          <div />
+          <div>{null}</div>
         )}
-      </>
+      </div>
     );
   }
 }

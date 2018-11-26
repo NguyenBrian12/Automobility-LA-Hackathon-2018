@@ -11,8 +11,8 @@
 .flexItem1 {
   background: black;
   padding: 5px;
-  width: 400px;
-  height: 150px;
+  width: 75%;
+  height: 100vh;
   margin-top: 10px;
 
   line-height: 150px;
@@ -20,25 +20,39 @@
   border: solid #379683;
   font-size: 3em;
   text-align: center;
+}
+.flexItem2 {
+  overflow-y: scroll;
+  height: 100vh;
 }
 .rightContainer {
   display: flex;
   flex-direction: column;
-}
-.flexItem2 {
-  background: black;
-  padding: 5px;
-  width: 200px;
-  height: 150px;
-  margin-top: 10px;
-  border: solid #379683;
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
+  padding: 15px;
+  font-size: 20px;
+  cursor: pointer;
   text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #c8d1cc;
+  background-color: #7395ae;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  font-family: "Raleway", sans-serif;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
+.rightContainer:hover {
+  background-color: #557a95;
+}
+
+.rightContainer:active {
+  background-color: #557a95;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 .main {
   background-color: #5d5c61;
 }

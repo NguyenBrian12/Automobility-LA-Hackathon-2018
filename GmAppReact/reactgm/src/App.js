@@ -80,17 +80,7 @@ class App extends Component {
   render() {
     const { merchantList } = this.state;
     return (
-    
-      <div className={styles.containerBoosted}>
-        <div className={styles.flexItem1}>Left</div>
-        <div className={styles.rightContainer}>
-          <div className={styles.flexItem2}>hello</div>
-          <div className={styles.flexItem2}>Item 1</div>
-          <div className={styles.flexItem2}>Item 2</div>
-          </div>
-          </div>
       <div className={styles.main}>
-      
         {this.state.searching === true && (
           <>
             <p className={styles.root}>What are you looking for?</p>
@@ -202,9 +192,15 @@ class App extends Component {
             </button>
           </>
         )}
-        <div style={{ marginTop: "10px" }}>
-          {merchantList && <MerchantListMap merchantList={merchantList} />}
-        </div>
+        {this.state.timeLimit && this.state.searchCatagory && (
+          <div className={styles.containerBoosted}>
+            <div className={styles.flexItem1}>Left</div>
+            {/* right side of the menu */}
+            <div className={styles.flexItem2}>
+              {merchantList && <MerchantListMap merchantList={merchantList} />}
+            </div>
+          </div>
+        )}
       </div>
     );
   }

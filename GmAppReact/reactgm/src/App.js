@@ -97,6 +97,8 @@ class App extends Component {
   showTime = () => {
     this.setState({});
   };
+
+  handlePopulateRoute = () => {};
   render() {
     const { merchantList, latitude, longitude } = this.state;
     return (

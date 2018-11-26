@@ -160,16 +160,27 @@ class MerchantListMap extends React.Component {
       }
     ],
     show: true,
-    directions: false
+    directions: false,
+    showShops: true,
+    letsGo: false
   };
 
   goToShop = merchant => {
     console.log("Let's go to " + merchant.name);
-    this.setState({ show: false, directions: true });
+    this.setState({
+      show: false,
+      directions: true,
+      showShops: false,
+      letsGo: true
+    });
+  };
+
+  showImg = () => {
+    this.setState({ img: "route map goes here" });
   };
 
   render() {
-    const { merchantList, directions, show } = this.state;
+    const { merchantList, directions, show, showShops, letsGo } = this.state;
     const { latitude, longitude } = this.props;
     console.log("dir", directions, latitude, longitude);
     return (
@@ -190,33 +201,50 @@ class MerchantListMap extends React.Component {
             longitude={longitude}
           />
         )}
-
-        <div className={styles.flexItem2}>
-          {merchantList.length > 0 ? (
-            <div>
-              {merchantList.map(merchant => (
-                <div
-                  key={merchant.id}
-                  className={styles.rightContainer}
-                  onClick={() => this.goToShop(merchant)}
-                >
-                  <div>{merchant.name}</div>
-                  <div>
-                    {" "}
-                    Wait <FontAwesomeIcon icon={faClock} />: {merchant.waitTime}
-                    mins{" "}
-                  </div>{" "}
-                  <div>
-                    Total <FontAwesomeIcon icon={faClock} />:{" "}
-                    {merchant.totalTime}mins
+        {letsGo && (
+          <div
+            className={styles.button}
+            style={{
+              width: "50%",
+              height: "25%",
+              fontFamily: "Raleway",
+              marginBottom: "5px"
+            }}
+            onClick={this.showImg}
+          >
+            Let's Go!
+          </div>
+        )}
+        {showShops && (
+          <div className={styles.flexItem2}>
+            {merchantList.length > 0 ? (
+              <div>
+                {merchantList.map(merchant => (
+                  <div
+                    key={merchant.id}
+                    className={styles.rightContainer}
+                    onClick={() => this.goToShop(merchant)}
+                  >
+                    <div>{merchant.name}</div>
+                    <div>
+                      {" "}
+                      Wait <FontAwesomeIcon icon={faClock} />:{" "}
+                      {merchant.waitTime}
+                      mins{" "}
+                    </div>{" "}
+                    <div>
+                      Total <FontAwesomeIcon icon={faClock} />:{" "}
+                      {merchant.totalTime}mins
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div>{null}</div>
-          )}
-        </div>
+                ))}
+              </div>
+            ) : (
+              <div>{null}</div>
+            )}
+          </div>
+        )}
+        <div />
       </div>
     );
   }

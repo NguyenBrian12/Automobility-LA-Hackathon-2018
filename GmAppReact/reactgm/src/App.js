@@ -36,6 +36,7 @@ class App extends Component {
     );
   };
   submitTime = time => {
+    console.log(time);
     this.setState(
       {
         timeLimit: time,

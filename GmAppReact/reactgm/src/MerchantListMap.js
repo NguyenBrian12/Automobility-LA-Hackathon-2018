@@ -1,4 +1,5 @@
 import React from "react";
+import GoogleMap from "./GoogleMap";
 
 class MerchantListMap extends React.Component {
   state = {
@@ -14,7 +15,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 3,
         distanceFrom: 6,
-        totalTime: 12
+        totalTime: 12,
+        latitude: 34.045152,
+        longitude: -118.266669
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752456",
@@ -27,7 +30,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 6,
         distanceFrom: 6,
-        totalTime: 15
+        totalTime: 15,
+        latitude: 34.044678,
+        longitude: -118.26612699999998
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d7529762",
@@ -40,7 +45,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 3,
         distanceFrom: 5,
-        totalTime: 13
+        totalTime: 13,
+        latitude: 34.0463704,
+        longitude: -118.26291579999997
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752959",
@@ -53,7 +60,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 4,
         distanceFrom: 6,
-        totalTime: 12
+        totalTime: 12,
+        latitude: 34.039327,
+        longitude: -118.25587300000001
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752900",
@@ -66,7 +75,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 1,
         distanceFrom: 2,
-        totalTime: 8
+        totalTime: 8,
+        latitude: 34.0449338,
+        longitude: -118.27665000000002
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752911",
@@ -79,7 +90,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 6,
         distanceFrom: 5,
-        totalTime: 13
+        totalTime: 13,
+        latitude: 34.04654379999999,
+        longitude: -118.25928829999998
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752949",
@@ -92,7 +105,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 10,
         distanceFrom: 8,
-        totalTime: 25
+        totalTime: 25,
+        latitude: 34.0423977,
+        longitude: -118.26932060000001
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752955",
@@ -105,7 +120,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 6,
         distanceFrom: 6,
-        totalTime: 17
+        totalTime: 17,
+        latitude: 34.0425093,
+        longitude: -118.25468869999997
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752985",
@@ -118,7 +135,9 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 6,
         distanceFrom: 5,
-        totalTime: 13
+        totalTime: 13,
+        latitude: 34.0462157,
+        longitude: -118.2572839
       },
       {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752940",
@@ -131,12 +150,15 @@ class MerchantListMap extends React.Component {
         country: "US",
         distanceTo: 6,
         distanceFrom: 5,
-        totalTime: 15
+        totalTime: 15,
+        latitude: 34.0504452,
+        longitude: -118.25951229999998
       }
     ]
   };
   render() {
     const { merchantList } = this.state;
+    const { latitude, longitude } = this.props;
     console.log(merchantList);
     return (
       <>
@@ -162,6 +184,11 @@ class MerchantListMap extends React.Component {
         ) : (
           <div />
         )}
+        <GoogleMap
+          latitude={latitude}
+          longitude={longitude}
+          merchantList={merchantList}
+        />
       </>
     );
   }

@@ -10,10 +10,8 @@
 }
 .flexItem1 {
   background: black;
-  padding: 5px;
   width: 75%;
   height: 100vh;
-  margin-top: 10px;
 
   line-height: 150px;
   color: white;
@@ -38,10 +36,9 @@
   background-color: #7395ae;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
   font-family: "Raleway", sans-serif;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .rightContainer:hover {
@@ -50,7 +47,7 @@
 
 .rightContainer:active {
   background-color: #557a95;
-  box-shadow: 0 5px #666;
+  box-shadow: 0 3px #666;
   transform: translateY(4px);
 }
 .main {

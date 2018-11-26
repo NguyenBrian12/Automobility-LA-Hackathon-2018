@@ -195,18 +195,14 @@ class App extends Component {
           </>
         )}
         {this.state.timeLimit && this.state.searchCatagory && (
-          <div className={styles.containerBoosted}>
-            <div className={styles.flexItem1}>Left</div>
-            {/* right side of the menu */}
-            <div className={styles.flexItem2}>
-              {merchantList && (
-                <MerchantListMap
-                  merchantList={merchantList}
-                  latitude={latitude}
-                  longitude={longitude}
-                />
-              )}
-            </div>
+          <div>
+            {merchantList && (
+              <MerchantListMap
+                merchantList={merchantList}
+                latitude={latitude}
+                longitude={longitude}
+              />
+            )}
           </div>
         )}
       </div>

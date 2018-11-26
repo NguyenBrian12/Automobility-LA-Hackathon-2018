@@ -162,26 +162,30 @@ class MerchantListMap extends React.Component {
     const { latitude, longitude } = this.props;
     console.log(merchantList);
     return (
-      <div>
-        {merchantList.length > 0 ? (
-          <div>
-            {merchantList.map(merchant => (
-              <div key={merchant.id} className={styles.rightContainer}>
-                <div>{merchant.name}</div>
-                <div> Wait Time: {merchant.waitTime}m </div>{" "}
-                <div>Total Time: {merchant.totalTime}m</div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div>{null}</div>
-        )}
+      <div className={styles.containerBoosted}>
+        <div className={styles.flexItem1}>
+          <GoogleMap
+            latitude={latitude}
+            longitude={longitude}
+            merchantList={merchantList}
+          />
+        </div>
 
-        <GoogleMap
-          latitude={latitude}
-          longitude={longitude}
-          merchantList={merchantList}
-        />
+        <div className={styles.flexItem2}>
+          {merchantList.length > 0 ? (
+            <div>
+              {merchantList.map(merchant => (
+                <div key={merchant.id} className={styles.rightContainer}>
+                  <div>{merchant.name}</div>
+                  <div> Wait Time: {merchant.waitTime}m </div>{" "}
+                  <div>Total Time: {merchant.totalTime}m</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div>{null}</div>
+          )}
+        </div>
       </div>
     );
   }

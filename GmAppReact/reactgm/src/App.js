@@ -1,17 +1,26 @@
 import React, { Component } from "react";
+import MerchantListMap from "./MerchantListMap";
 import styles from "./App.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faBackspace } from "@fortawesome/free-solid-svg-icons";
+
 const gm = window.gm;
 
 class App extends Component {
   state = {
     searchCatagory: "",
-    timeLimit: null,
+    timeLimit: 0,
     searching: true,
     timing: false,
     timeChange: "",
     vin: "pending...",
-    lat: null,
-    lng: null
+    latitude: null,
+    longitude: null,
+    merchantList: false
   };
   submitSearch = search => {
     console.log(search);
@@ -30,7 +39,8 @@ class App extends Component {
     this.setState(
       {
         timeLimit: time,
-        timing: false
+        timing: false,
+        merchantList: true
       },
       () => {
         console.log(this.state.timeLimit);
@@ -42,9 +52,11 @@ class App extends Component {
     this.setState({ vin });
 
     const processPosition = position => {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      this.setState({ lat, lng });
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      console.log("Lat:" + latitude);
+      console.log("long:" + longitude);
+      this.setState({ latitude: latitude, longitude: longitude });
     };
     gm.info.getCurrentPosition(processPosition, true);
     gm.info.watchPosition(processPosition, true);
@@ -53,6 +65,7 @@ class App extends Component {
   handleClose = () => {
     gm.system.closeApp();
   };
+
   handleBack = () => {
     this.setState(
       {
@@ -64,12 +77,28 @@ class App extends Component {
       }
     );
   };
+  handleBackFromResult = () => {
+    this.setState(
+      {
+        timeLimit: null,
+        timing: true
+      },
+      () => {
+        console.log(this.state.timeLimit);
+      }
+    );
+  };
   timeChange = e => {
     this.setState({
       timeChange: e.target.value
     });
   };
+
+  showTime = () => {
+    this.setState({});
+  };
   render() {
+    const { merchantList, latitude, longitude } = this.state;
     return (
       <div className={styles.main}>
         {this.state.searching === true && (
@@ -81,46 +110,29 @@ class App extends Component {
                   className={styles.button}
                   onClick={() => this.submitSearch("food")}
                 >
-                  Food
+                  <FontAwesomeIcon icon={faUtensils} /> Food
                 </button>
               </div>
-
               <div>
                 <button
                   className={styles.button}
-                  style={{ width: "100%", fontFamily: "Raleway" }}
-                  onClick={() => this.submitSearch("dessert")}
-                >
-                  Dessert
-                </button>
-              </div>
-
-              <div>
-                <button
-                  className={styles.button}
-                  style={{ width: "100%", fontFamily: "Raleway" }}
                   onClick={() => this.submitSearch("coffee")}
                 >
-                  Coffee
+                  <FontAwesomeIcon icon={faCoffee} /> Coffee
                 </button>
               </div>
 
               <div>
                 <button
                   className={styles.button}
-                  style={{ width: "100%", fontFamily: "Raleway" }}
-                  onClick={() => this.submitSearch("shopping")}
+                  onClick={() => this.submitSearch("groceries")}
                 >
-                  Shopping
+                  <FontAwesomeIcon icon={faShoppingBag} /> Groceries
                 </button>
               </div>
               <div>
-                <button
-                  className={styles.back}
-                  style={{ width: "25%", fontFamily: "Raleway" }}
-                  onClick={this.handleClose}
-                >
-                  Exit App
+                <button className={styles.back} onClick={this.handleClose}>
+                  <FontAwesomeIcon icon={faTimesCircle} /> Exit
                 </button>
               </div>
             </div>
@@ -132,16 +144,6 @@ class App extends Component {
             <div>
               <button
                 className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
-                onClick={() => this.submitTime(999)}
-              >
-                No Time Limit
-              </button>
-            </div>
-            <div>
-              <button
-                className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
                 onClick={() => this.submitTime(15)}
               >
                 15 Minutes
@@ -150,7 +152,6 @@ class App extends Component {
             <div>
               <button
                 className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
                 onClick={() => this.submitTime(30)}
               >
                 30 Minutes
@@ -159,7 +160,6 @@ class App extends Component {
             <div>
               <button
                 className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
                 onClick={() => this.submitTime(45)}
               >
                 45 Minutes
@@ -168,20 +168,46 @@ class App extends Component {
             <div>
               <button
                 className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
                 onClick={() => this.submitTime(60)}
               >
                 1 Hour
               </button>
             </div>
-            <button
-              className={styles.back}
-              style={{ width: "25%", fontFamily: "Raleway" }}
-              onClick={this.handleBack}
-            >
-              Back
+            <div>
+              <button
+                className={styles.button}
+                onClick={() => this.submitTime(999)}
+              >
+                No Time Limit
+              </button>
+            </div>
+            <button className={styles.back} onClick={this.handleBack}>
+              <FontAwesomeIcon icon={faBackspace} /> Back
             </button>
           </>
+        )}
+        {this.state.timeLimit && this.state.searchCatagory && (
+          <div>
+            {merchantList && (
+              <MerchantListMap
+                merchantList={merchantList}
+                latitude={latitude}
+                longitude={longitude}
+                timeLimit={this.state.timeLimit}
+              />
+            )}
+            <button
+              className={styles.back}
+              style={{
+                width: "25%",
+                fontFamily: "Raleway",
+                marginBottom: "5px"
+              }}
+              onClick={this.handleBackFromResult}
+            >
+              <FontAwesomeIcon icon={faBackspace} /> Back
+            </button>
+          </div>
         )}
       </div>
     );

@@ -192,6 +192,7 @@ class MerchantListMap extends React.Component {
       img
     } = this.state;
     const { latitude, longitude } = this.props;
+
     console.log("dir", directions, latitude, longitude);
     console.log(this.props.timeLimit);
     return (
@@ -223,16 +224,32 @@ class MerchantListMap extends React.Component {
         )}
         {letsGo && (
           <div
-            className={styles.button}
             style={{
-              width: "50%",
-              height: "25%",
-              fontFamily: "Raleway",
-              marginBottom: "5px"
+              display: "flex",
+              flexDirection: "column",
+              justifyItems: "center",
+              paddingTop: "120px"
             }}
-            onClick={this.showImg}
           >
-            <FontAwesomeIcon icon={faArrowCircleRight} /> Let's Go!
+            <div>{null}</div>
+            <div>{null}</div>
+            <div>{null}</div>
+            <div>{null}</div>
+            <br />
+            <div
+              className={styles.button}
+              style={{
+                width: "50%",
+                height: "25%",
+                fontFamily: "Raleway",
+                marginBottom: "5px",
+                paddingBottom: "30px"
+              }}
+              onClick={this.showImg}
+            >
+              <FontAwesomeIcon icon={faArrowCircleRight} />
+              <br /> Let's Go!
+            </div>
           </div>
         )}
 

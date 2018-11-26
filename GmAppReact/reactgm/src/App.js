@@ -13,7 +13,7 @@ const gm = window.gm;
 class App extends Component {
   state = {
     searchCatagory: "",
-    timeLimit: null,
+    timeLimit: 0,
     searching: true,
     timing: false,
     timeChange: "",
@@ -36,6 +36,7 @@ class App extends Component {
     );
   };
   submitTime = time => {
+    console.log(time);
     this.setState(
       {
         timeLimit: time,
@@ -195,6 +196,7 @@ class App extends Component {
                 merchantList={merchantList}
                 latitude={latitude}
                 longitude={longitude}
+                timeLimit={this.state.timeLimit}
               />
             )}
             <button

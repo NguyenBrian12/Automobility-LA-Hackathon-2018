@@ -13,7 +13,7 @@ class GoogleMap extends React.Component {
 
     const uluru = { lat: latitude, lng: longitude };
     const map = new window.google.maps.Map(this.reactMapRef.current, {
-      zoom: 4,
+      zoom: 14,
       center: uluru
     });
     const marker = new window.google.maps.Marker({

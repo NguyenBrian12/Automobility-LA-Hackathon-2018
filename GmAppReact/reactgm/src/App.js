@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./App.module.css";
-
 const gm = window.gm;
 
 class App extends Component {
@@ -9,7 +8,10 @@ class App extends Component {
     timeLimit: null,
     searching: true,
     timing: false,
-    timeChange: ""
+    timeChange: "",
+    vin: "pending...",
+    lat: null,
+    lng: null
   };
   submitSearch = search => {
     console.log(search);
@@ -35,6 +37,19 @@ class App extends Component {
       }
     );
   };
+  componentDidMount() {
+    const vin = gm.info.getVIN();
+    this.setState({ vin });
+
+    const processPosition = position => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      this.setState({ lat, lng });
+    };
+    gm.info.getCurrentPosition(processPosition, true);
+    gm.info.watchPosition(processPosition, true);
+  }
+
   handleClose = () => {
     gm.system.closeApp();
   };

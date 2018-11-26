@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
@@ -38,28 +37,13 @@ namespace BoostedCampers.Services
             Debug.WriteLine(info);
             Debug.WriteLine("Response Status: \n" + response.StatusCode);
             Debug.WriteLine("Response Headers: \n" + response.Headers.ToString());
-
+            
             using (var reader = new StreamReader(response.GetResponseStream(), ASCIIEncoding.ASCII))
             {
                 responseBody = reader.ReadToEnd();
             }
 
             Debug.WriteLine("Response Body: \n" + responseBody);
-        }
-        public void VisaQueueTest()
-        {
-            BoostedServices boostedServices = new BoostedServices();
-            string messageDate = DateTime.UtcNow.ToString("yyyy-MM-ddThh:mm:ss");
-            string queueInsights =
-                "{"
-                + "\"requestHeader\": {"
-                    + "\"messageDateTime\": \"" + messageDate + "\","
-                    + "\requestMessageId\": \"6da60e1b8b024532a2e0eacb1af58581\""
-                    + "},"
-                + "\"requestData\": {"
-                    + "\"kind\": \"predict\""
-                + "}"
-                    + "}";
         }
         public string DoMutualAuthCall(string path, string method, string testInfo, string requestBodyString, Dictionary<string, string> headers = null)
         {

@@ -27,12 +27,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className={styles.root}>
-        <div>VIN: {this.state.vin}</div>
-        <div>Emily</div>
-        <button onClick={this.handleClose}>Close</button>
-        <div>Latitude: {this.state.lat}</div>
-        <div>Longitude: {this.state.lng}</div>
+      <div className={styles.containerBoosted}>
+        {/* <div>VIN: {this.state.vin}</div> */}
+        {/* --this is where the console display will go */}
+
+        <div className={styles.flexItem1}>Left</div>
+        <div className={styles.rightContainer}>
+          <div className={styles.flexItem2}>hello</div>
+          <div className={styles.flexItem2}>Item 1</div>
+          <div className={styles.flexItem2}>Item 2</div>
+        </div>
       </div>
     );
   }

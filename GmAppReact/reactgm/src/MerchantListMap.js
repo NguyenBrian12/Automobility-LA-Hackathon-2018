@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMap from "./GoogleMap";
+import DirectionsMap from "./DirectionsMap";
 
 class MerchantListMap extends React.Component {
   state = {
@@ -154,10 +155,18 @@ class MerchantListMap extends React.Component {
         latitude: 34.0504452,
         longitude: -118.25951229999998
       }
-    ]
+    ],
+    show: true,
+    directions: false
   };
+
+  goToShop = merchant => {
+    console.log("Let's go to " + merchant.name);
+    this.setState({ show: false, directions: true });
+  };
+
   render() {
-    const { merchantList } = this.state;
+    const { merchantList, directions, show } = this.state;
     const { latitude, longitude } = this.props;
     console.log(merchantList);
     return (
@@ -173,7 +182,10 @@ class MerchantListMap extends React.Component {
                   flexDirection: "column"
                 }}
               >
-                <div style={{ color: "white" }}>
+                <div
+                  style={{ color: "white" }}
+                  onClick={() => this.goToShop(merchant)}
+                >
                   <strong style={{ color: "#7395AE" }}>{merchant.name}</strong>{" "}
                   <div>Wait Time: {merchant.waitTime}m.</div>
                   <div>Total Time: {merchant.totalTime}m</div>
@@ -184,11 +196,20 @@ class MerchantListMap extends React.Component {
         ) : (
           <div />
         )}
-        <GoogleMap
-          latitude={latitude}
-          longitude={longitude}
-          merchantList={merchantList}
-        />
+        {show && (
+          <GoogleMap
+            latitude={latitude}
+            longitude={longitude}
+            merchantList={merchantList}
+          />
+        )}
+        {directions && (
+          <DirectionsMap
+            merchantList={merchantList}
+            latitude={latitude}
+            longitude={longitude}
+          />
+        )}
       </>
     );
   }

@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import GoogleMap from "./GoogleMap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
 import DirectionsMap from "./DirectionsMap";
 
 class MerchantListMap extends React.Component {
@@ -162,7 +163,8 @@ class MerchantListMap extends React.Component {
     show: true,
     directions: false,
     showShops: true,
-    letsGo: false
+    letsGo: false,
+    img: false
   };
 
   goToShop = merchant => {
@@ -176,11 +178,19 @@ class MerchantListMap extends React.Component {
   };
 
   showImg = () => {
-    this.setState({ img: "route map goes here" });
+    this.setState({ directions: false, img: true, letsGo: false });
+    this.props.hideBack();
   };
 
   render() {
-    const { merchantList, directions, show, showShops, letsGo } = this.state;
+    const {
+      merchantList,
+      directions,
+      show,
+      showShops,
+      letsGo,
+      img
+    } = this.state;
     const { latitude, longitude } = this.props;
     console.log("dir", directions, latitude, longitude);
     console.log(this.props.timeLimit);
@@ -192,6 +202,15 @@ class MerchantListMap extends React.Component {
               latitude={latitude}
               longitude={longitude}
               merchantList={merchantList}
+            />
+          </div>
+        )}
+        {img && (
+          <div className={styles.flexItem1}>
+            {" "}
+            <img
+              style={{ height: "85vh", width: "173vh" }}
+              src="https://i.imgur.com/P7qv5jl.png"
             />
           </div>
         )}
@@ -213,9 +232,10 @@ class MerchantListMap extends React.Component {
             }}
             onClick={this.showImg}
           >
-            Let's Go!
+            <FontAwesomeIcon icon={faArrowCircleRight} /> Let's Go!
           </div>
         )}
+
         {showShops && (
           <div className={styles.flexItem2}>
             {merchantList.length > 0 ? (

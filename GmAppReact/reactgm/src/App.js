@@ -20,7 +20,11 @@ class App extends Component {
     vin: "pending...",
     latitude: null,
     longitude: null,
-    merchantList: false
+    merchantList: false,
+    showBack: true
+  };
+  hideBack = () => {
+    this.setState({ showBack: false });
   };
   submitSearch = search => {
     console.log(search);
@@ -113,7 +117,7 @@ class App extends Component {
                   className={styles.button}
                   onClick={() => this.submitSearch("food")}
                 >
-                  <FontAwesomeIcon icon={faUtensils} /> Food
+                  <FontAwesomeIcon icon={faUtensils} /> Lunch
                 </button>
               </div>
               <div>
@@ -197,19 +201,22 @@ class App extends Component {
                 latitude={latitude}
                 longitude={longitude}
                 timeLimit={this.state.timeLimit}
+                hideBack={this.hideBack}
               />
             )}
-            <button
-              className={styles.back}
-              style={{
-                width: "25%",
-                fontFamily: "Raleway",
-                marginBottom: "5px"
-              }}
-              onClick={this.handleBackFromResult}
-            >
-              <FontAwesomeIcon icon={faBackspace} /> Back
-            </button>
+            {this.state.showBack && (
+              <button
+                className={styles.back}
+                style={{
+                  width: "25%",
+                  fontFamily: "Raleway",
+                  marginBottom: "5px"
+                }}
+                onClick={this.handleBackFromResult}
+              >
+                <FontAwesomeIcon icon={faBackspace} /> Back
+              </button>
+            )}
           </div>
         )}
       </div>

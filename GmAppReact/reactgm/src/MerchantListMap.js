@@ -132,14 +132,14 @@ class MerchantListMap extends React.Component {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752985",
         id: 9,
         zip: "90017",
-        waitTime: 2,
+        waitTime: 30,
         city: "Los Angeles",
         name: "Allegro Coffee Company",
         state: "CA",
         country: "US",
         distanceTo: 6,
         distanceFrom: 5,
-        totalTime: 13,
+        totalTime: 75,
         latitude: 34.0462157,
         longitude: -118.2572839
       },
@@ -147,14 +147,14 @@ class MerchantListMap extends React.Component {
         feedbackCorrelationID: "0b6f2d2d-3ac4-4e4c-a0b4-4f1b5d752940",
         id: 10,
         zip: "90017",
-        waitTime: 4,
+        waitTime: 30,
         city: "Los Angeles",
-        name: "Two Guns Esprsso",
+        name: "Two Guns Espresso",
         state: "CA",
         country: "US",
         distanceTo: 6,
         distanceFrom: 5,
-        totalTime: 15,
+        totalTime: 60,
         latitude: 34.0504452,
         longitude: -118.25951229999998
       }
@@ -194,24 +194,28 @@ class MerchantListMap extends React.Component {
         <div className={styles.flexItem2}>
           {merchantList.length > 0 ? (
             <div>
-              {merchantList.map(merchant => (
-                <div
-                  key={merchant.id}
-                  className={styles.rightContainer}
-                  onClick={() => this.goToShop(merchant)}
-                >
-                  <div>{merchant.name}</div>
-                  <div>
-                    {" "}
-                    Wait <FontAwesomeIcon icon={faClock} />: {merchant.waitTime}
-                    mins{" "}
-                  </div>{" "}
-                  <div>
-                    Total <FontAwesomeIcon icon={faClock} />:{" "}
-                    {merchant.totalTime}mins
-                  </div>
-                </div>
-              ))}
+              {merchantList.filter(
+                merchant =>
+                  merchant.totalTime <= this.props.timeLimit && (
+                    <div
+                      key={merchant.id}
+                      className={styles.rightContainer}
+                      onClick={() => this.goToShop(merchant)}
+                    >
+                      <div>{merchant.name}</div>
+                      <div>
+                        {" "}
+                        Wait <FontAwesomeIcon icon={faClock} />:{" "}
+                        {merchant.waitTime}
+                        mins{" "}
+                      </div>{" "}
+                      <div>
+                        Total <FontAwesomeIcon icon={faClock} />:{" "}
+                        {merchant.totalTime}mins
+                      </div>
+                    </div>
+                  )
+              )}
             </div>
           ) : (
             <div>{null}</div>

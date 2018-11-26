@@ -3,6 +3,8 @@ import styles from "./App.module.css";
 import GoogleMap from "./GoogleMap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import DirectionsMap from "./DirectionsMap";
+
 class MerchantListMap extends React.Component {
   state = {
     merchantList: [
@@ -156,27 +158,54 @@ class MerchantListMap extends React.Component {
         latitude: 34.0504452,
         longitude: -118.25951229999998
       }
-    ]
+    ],
+    show: true,
+    directions: false
   };
+
+  goToShop = merchant => {
+    console.log("Let's go to " + merchant.name);
+    this.setState({ show: false, directions: true });
+  };
+
   render() {
-    const { merchantList } = this.state;
+    const { merchantList, directions, show } = this.state;
     const { latitude, longitude } = this.props;
     console.log(merchantList);
     return (
-      <div className={styles.containerBoosted}>
-        <div className={styles.flexItem1}>
-          <GoogleMap
-            latitude={latitude}
-            longitude={longitude}
-            merchantList={merchantList}
-          />
-        </div>
+      <div>
+        {show && (
+          <div className={styles.containerBoosted}>
+            <div className={styles.flexItem1}>
+              <GoogleMap
+                latitude={latitude}
+                longitude={longitude}
+                merchantList={merchantList}
+              />
+            </div>
+          </div>
+        )}
+        {directions && (
+          <div className={styles.containerBoosted}>
+            <div className={styles.flexItem1}>
+              <DirectionsMap
+                merchantList={merchantList}
+                latitude={latitude}
+                longitude={longitude}
+              />
+            </div>
+          </div>
+        )}
 
         <div className={styles.flexItem2}>
           {merchantList.length > 0 ? (
             <div>
               {merchantList.map(merchant => (
-                <div key={merchant.id} className={styles.rightContainer}>
+                <div
+                  key={merchant.id}
+                  className={styles.rightContainer}
+                  onClick={() => this.goToShop(merchant)}
+                >
                   <div>{merchant.name}</div>
                   <div>
                     {" "}

@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./App.module.css";
 
 class DirectionsMap extends React.Component {
   reactMapRef = React.createRef();
@@ -12,44 +13,52 @@ class DirectionsMap extends React.Component {
     const { merchantList } = this.props;
     const uluru = { lat: latitude, lng: longitude };
 
-    // const directionsService = new window.google.maps.DirectionsSerivce();
-    // const directionsDisplay = new window.google.maps.DirectionsRenderer();
+    const map = new window.google.maps.Map(this.reactMapRef.current, {
+      zoom: 10,
+      center: uluru
+    });
+    var DirectionsService = new window.google.maps.DirectionsSerivce();
+    var directionsDisplay = new window.google.maps.DirectionsRenderer();
     const starbucks = new window.google.maps.LatLng(
       34.044678,
       -118.26612699999998
     );
-    const mapOptions = {
-      zoom: 10,
-      center: starbucks
-    };
-    const map = new window.google.maps.Map(
-      this.reactMapRef.current,
-      mapOptions
-    );
 
     // conventionCenter Marker
-    const conventionCenter = new window.google.maps.Marker({
+    const conventionCenterMarker = new window.google.maps.Marker({
       position: uluru,
       animation: window.google.maps.Animation.DROP,
       map: map
     });
 
-    // directionsDisplay.setMap(map);
+    // directionsDisplay.setMap(mapOptions);
 
     // this.calcRoute = () => {
-    //   const start = document.querySelectorAll(".example").value;
+    //   const start = document.querySelectorAll(".start").value;
     //   const end = document.querySelectorAll(".end").value;
-    //   const request = {
-    //     origin: start,
-    //     destination: end,
-    //     travelMode: "DRIVING"
-    //   };
-    //   directionsService.route(request, function(result, status) {
-    //     if (status === "OK") {
-    //       directionsDisplay.setDirections(result);
-    //     }
-    //   });
+    // const request = {
+    //   origin: start,
+    //   destination: end,
+    //   travelMode: "DRIVING"
     // };
+    // directionsService.route(request, function(result, status) {
+    //   if (status === "OK") {
+    //     directionsDisplay.setDirections(result);
+    //   }
+    // });
+
+    DirectionsService.route(
+      {
+        origin: uluru,
+        destination: starbucks,
+        travelMode: "DRIVING"
+      },
+      (result, status) => {
+        if (status === "OK") {
+          directionsDisplay.setDirections(result);
+        }
+      }
+    );
     // LA convention center
     const laConventionCenter = new window.google.maps.Map(
       this.reactMapRef.current,
@@ -65,25 +74,28 @@ class DirectionsMap extends React.Component {
     });
   };
 
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+    console.log("n" + name + " v" + value);
+  };
   render() {
     return (
-      <>
-        <div
-          style={{ width: "100%", height: "400px", backgroundColor: "grey" }}
-          ref={this.reactMapRef}
-        />
+      <div className={styles.flexItem1}>
+        <div ref={this.reactMapRef} />
         <div>
-          <strong>Start:</strong>
-          <select className="start" onChange={this.calcRoute}>
-            <option value="starbucks">Starbucks</option>
+          <span>Start:</span>
+          <select className="start" onChange={this.handleChange}>
+            <option name="start" value={this.state.start}>
+              Starbucks
+            </option>
           </select>
         </div>
         <div>
-          <strong>
-            <select className="end" onChange={this.calcRoute} />
-          </strong>
+          <span>End:</span>
+          <select className="end" onChange={this.handleChange} />
         </div>
-      </>
+      </div>
     );
   }
 }

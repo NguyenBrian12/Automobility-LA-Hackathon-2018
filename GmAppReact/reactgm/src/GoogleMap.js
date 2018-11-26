@@ -12,6 +12,7 @@ class GoogleMap extends React.Component {
     const { merchantList } = this.props;
 
     const uluru = { lat: latitude, lng: longitude };
+
     const map = new window.google.maps.Map(this.reactMapRef.current, {
       zoom: 10,
       center: uluru

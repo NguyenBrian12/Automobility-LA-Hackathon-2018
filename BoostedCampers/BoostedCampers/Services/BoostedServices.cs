@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
@@ -86,8 +87,12 @@ namespace BoostedCampers.Services
                 // Make the call
                 using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
                 {
-                    LogResponse(testInfo, response);
-                    statusCode = response.StatusCode.ToString();
+                    //LogResponse(testInfo, response);
+                    //statusCode = response.StatusCode.ToString();
+                    using (var sr = new StreamReader(response.GetResponseStream()))
+                    {
+                        return sr.ReadToEnd();
+                    }
                 }
             }
             catch (WebException e)

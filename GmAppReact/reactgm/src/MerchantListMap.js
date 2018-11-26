@@ -210,7 +210,7 @@ class MerchantListMap extends React.Component {
           <div className={styles.flexItem1}>
             {" "}
             <img
-              style={{ height: "81vh", width: "158vh" }}
+              style={{ height: "81vh", width: "164vh" }}
               src="https://i.imgur.com/P7qv5jl.png"
             />
           </div>

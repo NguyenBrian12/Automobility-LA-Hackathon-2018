@@ -1,7 +1,7 @@
 .root {
-  margin-top: 100px;
   font-size: 2em;
-  color: white;
+  color: #c8d1cc;
+  font-family: "Raleway", sans-serif;
 }
 
 .containerBoosted {
@@ -37,4 +37,62 @@
   font-weight: bold;
   font-size: 3em;
   text-align: center;
+}
+
+.main {
+  background-color: #5d5c61;
+}
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #c8d1cc;
+  background-color: #7395ae;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  font-family: "Raleway", sans-serif;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.button:hover {
+  background-color: #557a95;
+}
+
+.button:active {
+  background-color: #557a95;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.back {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #c8d1cc;
+  background-color: #7395ae;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  font-family: "Raleway", sans-serif;
+  width: 25%;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+.back:hover {
+  background-color: #557a95;
+}
+
+.back:active {
+  background-color: #557a95;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

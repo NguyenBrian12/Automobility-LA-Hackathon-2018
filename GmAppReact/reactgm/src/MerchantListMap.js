@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./App.module.css";
 import GoogleMap from "./GoogleMap";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 class MerchantListMap extends React.Component {
   state = {
     merchantList: [
@@ -177,8 +178,15 @@ class MerchantListMap extends React.Component {
               {merchantList.map(merchant => (
                 <div key={merchant.id} className={styles.rightContainer}>
                   <div>{merchant.name}</div>
-                  <div> Wait Time: {merchant.waitTime}m </div>{" "}
-                  <div>Total Time: {merchant.totalTime}m</div>
+                  <div>
+                    {" "}
+                    Wait <FontAwesomeIcon icon={faClock} />: {merchant.waitTime}
+                    mins{" "}
+                  </div>{" "}
+                  <div>
+                    Total <FontAwesomeIcon icon={faClock} />:{" "}
+                    {merchant.totalTime}mins
+                  </div>
                 </div>
               ))}
             </div>

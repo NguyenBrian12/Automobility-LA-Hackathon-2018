@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import MerchantListMap from "./MerchantListMap";
 import styles from "./App.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faBackspace } from "@fortawesome/free-solid-svg-icons";
+
 const gm = window.gm;
 
 class App extends Component {
@@ -70,6 +77,17 @@ class App extends Component {
       }
     );
   };
+  handleBackFromResult = () => {
+    this.setState(
+      {
+        timeLimit: null,
+        timing: true
+      },
+      () => {
+        console.log(this.state.timeLimit);
+      }
+    );
+  };
   timeChange = e => {
     this.setState({
       timeChange: e.target.value
@@ -92,46 +110,29 @@ class App extends Component {
                   className={styles.button}
                   onClick={() => this.submitSearch("food")}
                 >
-                  Food
+                  <FontAwesomeIcon icon={faUtensils} /> Food
                 </button>
               </div>
-
               <div>
                 <button
                   className={styles.button}
-                  style={{ width: "100%", fontFamily: "Raleway" }}
-                  onClick={() => this.submitSearch("dessert")}
-                >
-                  Dessert
-                </button>
-              </div>
-
-              <div>
-                <button
-                  className={styles.button}
-                  style={{ width: "100%", fontFamily: "Raleway" }}
                   onClick={() => this.submitSearch("coffee")}
                 >
-                  Coffee
+                  <FontAwesomeIcon icon={faCoffee} /> Coffee
                 </button>
               </div>
 
               <div>
                 <button
                   className={styles.button}
-                  style={{ width: "100%", fontFamily: "Raleway" }}
-                  onClick={() => this.submitSearch("shopping")}
+                  onClick={() => this.submitSearch("groceries")}
                 >
-                  Shopping
+                  <FontAwesomeIcon icon={faShoppingBag} /> Groceries
                 </button>
               </div>
               <div>
-                <button
-                  className={styles.back}
-                  style={{ width: "25%", fontFamily: "Raleway" }}
-                  onClick={this.handleClose}
-                >
-                  Exit App
+                <button className={styles.back} onClick={this.handleClose}>
+                  <FontAwesomeIcon icon={faTimesCircle} /> Exit
                 </button>
               </div>
             </div>
@@ -143,16 +144,6 @@ class App extends Component {
             <div>
               <button
                 className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
-                onClick={() => this.submitTime(999)}
-              >
-                No Time Limit
-              </button>
-            </div>
-            <div>
-              <button
-                className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
                 onClick={() => this.submitTime(15)}
               >
                 15 Minutes
@@ -161,7 +152,6 @@ class App extends Component {
             <div>
               <button
                 className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
                 onClick={() => this.submitTime(30)}
               >
                 30 Minutes
@@ -170,7 +160,6 @@ class App extends Component {
             <div>
               <button
                 className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
                 onClick={() => this.submitTime(45)}
               >
                 45 Minutes
@@ -179,18 +168,21 @@ class App extends Component {
             <div>
               <button
                 className={styles.button}
-                style={{ width: "100%", fontFamily: "Raleway" }}
                 onClick={() => this.submitTime(60)}
               >
                 1 Hour
               </button>
             </div>
-            <button
-              className={styles.back}
-              style={{ width: "25%", fontFamily: "Raleway" }}
-              onClick={this.handleBack}
-            >
-              Back
+            <div>
+              <button
+                className={styles.button}
+                onClick={() => this.submitTime(999)}
+              >
+                No Time Limit
+              </button>
+            </div>
+            <button className={styles.back} onClick={this.handleBack}>
+              <FontAwesomeIcon icon={faBackspace} /> Back
             </button>
           </>
         )}
@@ -203,6 +195,17 @@ class App extends Component {
                 longitude={longitude}
               />
             )}
+            <button
+              className={styles.back}
+              style={{
+                width: "25%",
+                fontFamily: "Raleway",
+                marginBottom: "5px"
+              }}
+              onClick={this.handleBackFromResult}
+            >
+              <FontAwesomeIcon icon={faBackspace} /> Back
+            </button>
           </div>
         )}
       </div>

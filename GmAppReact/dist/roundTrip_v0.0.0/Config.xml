@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gmWebApp>
+  <AppID>96186803</AppID>
+  <AppType>RemoteHigh</AppType>
+  <FriendlyName>roundTrip</FriendlyName>
+  <VehicleStatus>Drive</VehicleStatus>
+  <AutoStart>False</AutoStart>
+  <AppCategory>General</AppCategory>
+  <IconURL>Icon.png</IconURL>
+  <MainURL>index.html</MainURL>
+  <AppVersion>0.0.0</AppVersion>
+  <SetupURL>setup.html</SetupURL>
+  <LocalPath>App96186803</LocalPath>
+  <Developer>Developer</Developer>
+  <TrustedApp>false</TrustedApp>
+  <RequestedBy>1</RequestedBy>
+  <TestApp>true</TestApp>
+  <render>normal</render>
+  <VIN>ALLVINS</VIN>
+  <MaxDataSize>24600</MaxDataSize>
+  <Description>
+    <en>Generated on 2018-11-21 13:36:58 by ngi-sdk version 1.6.0</en>
+  </Description>
+  
+  
+  <Info3>
+    <PackageName>com.gm.ngi.roundtrip</PackageName>
+    <fullscreen>false</fullscreen>
+    <Permissions>
+        <Permission name="android.permission.ACCESS_NETWORK_STATE"/>
+        <Permission name="android.permission.ACCESS_WIFI_STATE"/>
+        <Permission name="android.permission.INTERNET"/>
+        <Permission name="com.gm.vehicle.permission.READ_VEHICLE_INFORMATION"/>
+        <Permission name="gm.permission.ACCESS_DRIVINGMODE"/>
+    </Permissions>
+    <IconURL>
+      <inch_8>icons/icon_info3_8sd.png</inch_8>
+      <inch_8_hd>icons/icon_info3_8hd.png</inch_8_hd>
+      <inch_10>icons/icon_info3_10hd.png</inch_10>
+    </IconURL>
+    
+  </Info3>
+</gmWebApp>
